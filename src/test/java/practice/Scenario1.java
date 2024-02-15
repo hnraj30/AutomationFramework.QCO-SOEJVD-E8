@@ -23,7 +23,7 @@ public class Scenario1
 		driver.findElement(By.name("user_password")).sendKeys("admin");
 		driver.findElement(By.id("submitButton")).click();
 		driver.findElement(By.xpath("//a[text()='Contacts']")).click();
-		Thread.sleep(000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//img[@src='themes/softed/images/btnL3Add.gif']")).click();
 		driver.findElement(By.xpath("//input[@name='firstname']")).sendKeys("Rajendra");
 		driver.findElement(By.xpath("//input[@name='lastname']")).sendKeys("NH");

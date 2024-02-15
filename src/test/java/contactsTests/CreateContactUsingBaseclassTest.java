@@ -71,12 +71,6 @@ public class CreateContactUsingBaseclassTest extends BaseClass
 	{
 		System.out.println("----From demo---- ");
 	}
-
-	
-	
-	
-	
-	
 	
 	
 	

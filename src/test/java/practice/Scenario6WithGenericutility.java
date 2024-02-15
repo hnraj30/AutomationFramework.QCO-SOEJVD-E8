@@ -1,0 +1,114 @@
+package practice;
+
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import genericUtilities.ExcelFileUtility;
+import genericUtilities.JavaUtility;
+import genericUtilities.PropertyFileUtility;
+import genericUtilities.WebDriverUtility;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Scenario6WithGenericutility 
+{
+	public static void main(String[]args) throws IOException, InterruptedException
+	{
+		//Create object for all utility
+		PropertyFileUtility pUtil = new PropertyFileUtility();
+		ExcelFileUtility eUtil = new ExcelFileUtility();
+		JavaUtility jUtil = new JavaUtility();
+		WebDriverUtility wUtil = new WebDriverUtility();
+		
+		//Read all required Data 
+		String BROWSER = pUtil.readDataFromPropertyFile("browser");
+		String URL = pUtil.readDataFromPropertyFile("url");
+		String USERNAME = pUtil.readDataFromPropertyFile("username");
+		String PASSWORD = pUtil.readDataFromPropertyFile("password");
+		String PRODUCTNAME = eUtil.readDataFromExcelFile("Products", 1, 2)+jUtil.getRandomNumber();
+		System.out.println(BROWSER);
+		System.out.println(URL);
+		System.out.println(USERNAME);
+		System.out.println(PASSWORD);
+		System.out.println(PRODUCTNAME);
+		
+		//Launch Browser
+		WebDriver driver = null;
+		if(BROWSER.equalsIgnoreCase("firefox"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+			System.out.println("Firefox browser launched successfully");
+		}
+		else if(BROWSER.equalsIgnoreCase("chrome"))
+		{
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+			System.out.println("Chrome browser launched successfully");
+		}
+		else if(BROWSER.equalsIgnoreCase("edge"))
+		{
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+			System.out.println("Edge browser launched successfully");
+		}
+		else
+		{
+			System.out.println("Invalid browser name");
+		}
+		
+		wUtil.maximizeWindow(driver);
+		wUtil.waitForPageLoad(driver);
+		
+		//driver.manage().window().maximize();
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+		//Login to the application
+		driver.get("http://localhost:8888/");
+		driver.findElement(By.name("user_name")).sendKeys(USERNAME);
+		driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
+		driver.findElement(By.id("submitButton")).click();
+		
+		//Click on products tab
+		driver.findElement(By.xpath("//a[.='Products']")).click();
+		
+		//Click on create new product look up icon
+		driver.findElement(By.xpath("//img[@alt='Create Product...']")).click();
+
+		//Create new product with mandatory fields
+		driver.findElement(By.name("productname")).sendKeys("Sample_Product_02");
+		driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
+		
+		Thread.sleep(3000);
+		
+		//Validate Product
+		String productHeader = driver.findElement(By.xpath("//span[@id='dtlview_Product Name']")).getText();
+		if(productHeader.contains(PRODUCTNAME))
+		{
+			System.out.println("Product "+PRODUCTNAME+ "created successfullty");
+		}
+		else
+		{
+			System.out.println("Product creation failed");
+		}
+		
+		//Logout
+		WebElement adminIcon = driver.findElement(By.xpath("(//img[@style='padding: 0px;padding-left:5px'])[1]"));
+		Actions a = new Actions(driver);
+		a.moveToElement(adminIcon).perform();
+		driver.findElement(By.xpath("//a[.='Sign Out']")).click();
+		System.out.println("Logged out succesfully");
+
+		//Close the application
+		driver.close();			
+		
+	}
+
+}

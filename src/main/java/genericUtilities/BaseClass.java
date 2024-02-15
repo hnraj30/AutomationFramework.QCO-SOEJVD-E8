@@ -43,7 +43,7 @@ public class BaseClass
 	}
 	
 	//@Parameters("browser")
-	//@BeforeTest//Use only for distributed parallel execution, cross browser execution
+	//@BeforeTest	//Use only for distributed parallel execution, cross browser execution
 	@BeforeClass(alwaysRun=true)
 	public void bcConfig(/*String BROWSER*/) throws IOException
 	{
@@ -102,8 +102,8 @@ public class BaseClass
 	}
 	
 	
-	//@AfterClass(alwaysRun=true)
-	@AfterTest(alwaysRun=true)//Use only for distributed parallel execution
+	@AfterClass(alwaysRun=true)
+	//@AfterTest(alwaysRun=true)//Use only for distributed parallel execution
 	public void acConfig()
 	{
 		driver.quit();

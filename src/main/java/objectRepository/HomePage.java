@@ -22,6 +22,9 @@ public class HomePage extends WebDriverUtility
 	@FindBy(xpath="//a[text()='Sign Out']") 
 	private WebElement signOutBtn;
 	
+	@FindBy(xpath="//a[.='Products']")
+	private WebElement productsTab;
+	
 
 	//initialization
 	public HomePage(WebDriver driver)
@@ -47,6 +50,11 @@ public class HomePage extends WebDriverUtility
 
 	public WebElement getSignOutBtn() {
 		return signOutBtn;
+	}
+	
+	public  WebElement getProductsBtn()
+	{
+		return productsTab;
 	}
 	
 	// Buisiness Libray: Generic methods according to the need of project
@@ -79,6 +87,15 @@ public class HomePage extends WebDriverUtility
 		signOutBtn.click();
 		
 	}
+	/**
+	 * This method clicks on Products button
+	 */
+	//Business library
+	public  void clickOnProductsTab()
+	{
+		productsTab.click();
+	}
+	
 	
 	
 }

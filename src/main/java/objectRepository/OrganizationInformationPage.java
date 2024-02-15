@@ -22,9 +22,9 @@ public class OrganizationInformationPage
 		return orgHeader;
 	}
 	
-	//Buisiness library
+	//Business library
 	/**
-	 * This methgod will get header text and return it to caller	
+	 * This method will get header text and return it to caller	
 	 * @return
 	 */
 	public String getHeaderText() {
