@@ -30,6 +30,8 @@ public class CreateContactTest {
 		WebDriverUtility wUtil = new WebDriverUtility();
 		
 		
+		
+		
 		//Read required data
 		String BROWSER = pUtil.readDataFromPropertyFile("browser");
 		String URL = pUtil.readDataFromPropertyFile("url");
