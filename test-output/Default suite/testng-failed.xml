@@ -3,17 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="productTests.CreateNewProductTest">
+      <class name="practice.AssertionPractice2">
         <methods>
           <include name="amConfig"/>
           <include name="bcConfig"/>
           <include name="bmConfig"/>
           <include name="acConfig"/>
           <include name="bsConfig"/>
-          <include name="createNewProduct"/>
           <include name="asConfig"/>
+          <include name="createContactTest"/>
         </methods>
-      </class> <!-- productTests.CreateNewProductTest -->
+      </class> <!-- practice.AssertionPractice2 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

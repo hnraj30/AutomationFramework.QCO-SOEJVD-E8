@@ -27,7 +27,7 @@ import objectRepository.LoginPage;
 public class CreateContactUsingBaseclassTest extends BaseClass
 
 {
-	@Test()	//groups="SmokeSuite"
+	@Test(groups="SmokeSuite")	//
 	
 	public  void createContactTest() throws InterruptedException, IOException 
 	{
